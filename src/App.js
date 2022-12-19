@@ -15,10 +15,11 @@ function App() {
       selecedtData: selecedtDataRef?.current?.value,
     };
     console.log(info);
+
     // add data info the mongodb
     try {
       setMessage("");
-      const url = "http://localhost:8000/addData";
+      const url = "http://localhost:8000/addInputData";
       const option = {
         method: "POST",
         body: JSON.stringify(info),
@@ -40,50 +41,55 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
+    <div className="main_body">
+      <form className="form_body" onSubmit={handleSubmit}>
         <div>
-          <div>
-            <label htmlFor="fname" className="form-label">
-              Name
-            </label>
-          </div>
-          <div>
-            <input
-              ref={nameRef}
-              type="text"
-              id="fname"
-              name="name"
-              placeholder="name.."
-              className="form-control"
-              required
-            />
-          </div>
+          <label htmlFor="fname" className="form-label">
+            Name:
+          </label>
+          <input
+            ref={nameRef}
+            type="text"
+            id="fname"
+            name="name"
+            placeholder="name"
+            className="form-control"
+            required
+          />
         </div>
 
         <div>
-          <div>
-            <label htmlFor="select" className="form-label">
-              select data
-            </label>
-          </div>
+          <label htmlFor="select" className="form-label mt-2">
+            Select:
+          </label>
 
-          <div>
-            <select
-              id="select"
-              name="selectedData"
-              className="input-group form-select"
-              ref={selecedtDataRef}
-            >
-              <option value="">Choose</option>
-              <option value="1">Yes</option>
-              <option value="2">No</option>
-            </select>
-          </div>
+          <select
+            id="select"
+            name="selectedData"
+            className="input-group form-select"
+            ref={selecedtDataRef}
+            required
+          >
+            <option value="1">Manufacturing</option>
+            <option value="19">
+              &nbsp;&nbsp;&nbsp;&nbsp;Construction materials
+            </option>
+            <option value="18">
+              &nbsp;&nbsp;&nbsp;&nbsp;Electronics and Optics
+            </option>
+          </select>
         </div>
 
-        <button type="submit">Submit</button>
+        <label htmlFor="terms" className="mt-4">
+          <input type="checkbox" id="term" name="terms" value="false" /> Agree
+          to Terms
+        </label>
+        <br />
+        <button type="submit" className="submit_btn">
+          Submit
+        </button>
       </form>
+      <p className="successMsg">{message}</p>
     </div>
   );
 }
